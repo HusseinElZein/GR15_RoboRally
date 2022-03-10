@@ -38,6 +38,9 @@ public class GameController {
         this.board = board;
     }
 
+    // Creating a variable i that will keep track of whose turn it is when moving a player to a space.
+    private int i = 0;
+
     /**
      * This is just some dummy controller operation to make a simple move to see something
      * happening on the board. This method should eventually be deleted!
@@ -52,6 +55,31 @@ public class GameController {
         //     following the current player
         //   - the counter of moves in the game should be increased by one
         //     if the player is moved
+
+        // Moving the player if the field is free.
+        if (space.getPlayer() == null) {
+            // Moving the current player to their desired space location:
+            space.setPlayer(board.getCurrentPlayer());
+
+            // When a player moves, the count of moves will increase and different messages will be shown:
+            board.getStatusMessage();
+
+            /*
+            Here we want to increase "i", so that the next player can be set at the current player.
+            This will only happen, if the current player is not the last player at index PlayersNumber - 1.
+            The last index has - 1, because the players are stored in an arraylist, which starts at index 0.
+            As soon as "i" has incremented to the amount of players in the game, "i" will be set equal to 0.
+            That way player 1 can get its turn again.
+             */
+            if (i != (board.getPlayersNumber() - 1)) {
+                i++;
+            } else {
+                i = 0;
+            }
+
+            // Here we set the current player to "i".
+            board.setCurrentPlayer(board.getPlayer(i));
+        }
 
     }
 
