@@ -38,28 +38,6 @@ public class GameController {
         this.board = board;
     }
 
-    // Creating a variable i that will keep track of whose turn it is when moving a player to a space.
-    private int i = 0;
-
-    /**
-     * This is just some dummy controller operation to make a simple move to see something
-     * happening on the board. This method should eventually be deleted!
-     *
-     * @param space the space to which the current player should move
-     */
-    public void moveCurrentPlayerToSpace(@NotNull Space space)  {
-        // TODO Assignment V1: method should be implemented by the students:
-        //   - the current player should be moved to the given space
-        //     (if it is free()
-        //   - and the current player should be set to the player
-        //     following the current player
-        //   - the counter of moves in the game should be increased by one
-        //     if the player is moved
-
-
-
-    }
-
     // XXX: V2
     public void startProgrammingPhase() {
         board.setPhase(Phase.PROGRAMMING);
@@ -202,22 +180,23 @@ public class GameController {
 
     // TODO Assignment V2
     public void moveForward(@NotNull Player player) {
-
+        player.board.getNeighbour(player.getSpace(), player.getHeading()).setPlayer(player);
     }
 
     // TODO Assignment V2
     public void fastForward(@NotNull Player player) {
-
+        player.board.getNeighbour(player.getSpace(), player.getHeading()).setPlayer(player);
+        player.board.getNeighbour(player.getSpace(), player.getHeading()).setPlayer(player);
     }
 
     // TODO Assignment V2
     public void turnRight(@NotNull Player player) {
-
+        player.setHeading(player.getHeading().next());
     }
 
     // TODO Assignment V2
     public void turnLeft(@NotNull Player player) {
-
+        player.setHeading(player.getHeading().prev());
     }
 
     public boolean moveCards(@NotNull CommandCardField source, @NotNull CommandCardField target) {
